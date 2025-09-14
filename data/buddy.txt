@@ -6,3 +6,6 @@ E | 0 | team meeting | 2pm | 4pm
 T | 0 | test package
 T | 0 | gradle test
 T | 0 | test jar
+T | 0 | buy groceries
+D | 0 | submit report | tomorrow
+E | 0 | meeting | 2pm | 4pm
