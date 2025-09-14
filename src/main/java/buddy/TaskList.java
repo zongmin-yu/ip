@@ -30,18 +30,34 @@ public class TaskList {
     }
     
     public void deleteTask(int index) throws BuddyException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new BuddyException("Task number is out of range.");
-        }
+        validateTaskIndex(index, "delete");
         assert !tasks.isEmpty() : "Task list should not be empty when deleting";
         tasks.remove(index);
     }
-    
+
     public Task getTask(int index) throws BuddyException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new BuddyException("Task number is out of range.");
-        }
+        validateTaskIndex(index, "access");
         return tasks.get(index);
+    }
+
+    private void validateTaskIndex(int index, String operation) throws BuddyException {
+        if (tasks.isEmpty()) {
+            throw new BuddyException("📋 Your task list is empty! Add some tasks first before trying to " +
+                                   operation + " them! Use 'todo', 'deadline', or 'event' to add tasks! ✨");
+        }
+
+        if (index < 0) {
+            throw new BuddyException("🔢 Task numbers start from 1, not " + (index + 1) + "! " +
+                                   "Please use positive numbers! 📊");
+        }
+
+        if (index >= tasks.size()) {
+            String suggestion = tasks.size() == 1
+                ? "You only have 1 task, so use '1'! 🎯"
+                : String.format("You have %d tasks, so use numbers 1 to %d! 📋", tasks.size(), tasks.size());
+
+            throw new BuddyException("🎯 Task number " + (index + 1) + " doesn't exist! " + suggestion);
+        }
     }
     
     public void markTask(int index) throws BuddyException {

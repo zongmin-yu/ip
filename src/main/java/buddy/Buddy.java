@@ -212,6 +212,9 @@ public class Buddy {
             return processCommand(command, input);
         } catch (BuddyException e) {
             return e.getMessage();
+        } catch (Exception e) {
+            return "🚨 Oops! Something unexpected happened! Please try again. " +
+                   "If this keeps happening, maybe try a simpler command first! 🔧";
         }
     }
     

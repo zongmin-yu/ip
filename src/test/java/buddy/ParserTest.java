@@ -7,18 +7,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ParserTest {
     
     @Test
-    void parseCommand_validCommands_success() {
+    void parseCommand_validCommands_success() throws BuddyException {
         assertEquals("todo", Parser.parseCommand("todo read book"));
         assertEquals("deadline", Parser.parseCommand("deadline submit report /by Sunday"));
         assertEquals("list", Parser.parseCommand("list"));
         assertEquals("bye", Parser.parseCommand("bye"));
         assertEquals("mark", Parser.parseCommand("MARK 1"));
     }
-    
+
     @Test
-    void parseCommand_emptyInput_returnsEmpty() {
-        assertEquals("", Parser.parseCommand(""));
-        assertEquals("", Parser.parseCommand("   "));
+    void parseCommand_emptyInput_throwsException() {
+        assertThrows(BuddyException.class, () -> Parser.parseCommand(""));
+        assertThrows(BuddyException.class, () -> Parser.parseCommand("   "));
     }
     
     @Test
